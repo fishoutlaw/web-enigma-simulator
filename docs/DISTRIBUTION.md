@@ -13,6 +13,7 @@ enigma.js
 app.js
 style.css
 README.md
+LICENSE
 THIRD_PARTY_NOTICES.md
 licenses/
   Py-Enigma-MIT.txt

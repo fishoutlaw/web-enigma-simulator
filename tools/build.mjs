@@ -38,6 +38,7 @@ for (const name of ['index.html', 'style.css']) {
   await copyFile(resolve(root, 'src/ui', name), resolve(root, 'dist', name));
 }
 for (const [from, to] of [
+  ['LICENSE', 'LICENSE'],
   ['licenses/Py-Enigma-MIT.txt', 'licenses/Py-Enigma-MIT.txt'],
   ['docs/DISTRIBUTION.md', 'README.md'],
   ['THIRD_PARTY_NOTICES.md', 'THIRD_PARTY_NOTICES.md'],

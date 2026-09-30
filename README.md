@@ -76,4 +76,4 @@ licenses/              원본 Py-Enigma MIT 고지
 
 ## 출처·라이선스
 
-계산 코드는 [Py-Enigma](https://github.com/gremmie/enigma) 1.0.2를 참고하여 JavaScript로 재작성했습니다. [원본 MIT 고지](licenses/Py-Enigma-MIT.txt)와 [제3자 고지](THIRD_PARTY_NOTICES.md)를 함께 배포합니다. 전체 프로젝트의 별도 라이선스는 아직 지정하지 않았습니다.
+계산 코드는 [Py-Enigma](https://github.com/gremmie/enigma) 1.0.2를 참고하여 JavaScript로 재작성했습니다. [원본 MIT 고지](licenses/Py-Enigma-MIT.txt)와 [제3자 고지](THIRD_PARTY_NOTICES.md)를 함께 배포합니다. 프로젝트는 [MIT 라이선스](LICENSE)로 배포합니다.
