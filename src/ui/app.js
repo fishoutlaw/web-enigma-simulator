@@ -1,5 +1,5 @@
 import {Experiment} from '../experiment/state.js';
-import {ABC,defaults,clean,EnigmaMachine} from '../core/enigma.js';
+import {ABC,ROTOR_NAMES,defaults,clean,EnigmaMachine} from '../core/enigma.js';
 import {diagramMarkup} from './diagram.js';
 import {rotationRange} from './geometry.js';
 const $ = s => document.querySelector(s);
@@ -21,7 +21,7 @@ function schedule(){
   jobsTimer=setTimeout(()=>{jobsTimer=null;if(epoch===sim.id&&ticket===scheduledGeneration)pump();},0);
 }
 function fields(config) {
-  $('#configFields').innerHTML=config.rotors.map((r,i)=>`<div><b>${['왼쪽','가운데','오른쪽'][i]}</b><label>로터<select id="order${i}" aria-label="${['왼쪽','가운데','오른쪽'][i]} 로터">${['I','II','III','IV','V'].map(x=>`<option ${x===r?'selected':''}>${x}</option>`).join('')}</select></label>${['start'].map(k=>`<label>${k==='start'?'시작 위치':'링 설정'}<select id="${k}${i}" aria-label="${['왼쪽','가운데','오른쪽'][i]} ${k==='start'?'시작 위치':'링 설정'}">${[...ABC].map(x=>`<option ${x===config[k][i]?'selected':''}>${x}</option>`).join('')}</select></label>`).join('')}</div>`).join('');
+  $('#configFields').innerHTML=config.rotors.map((r,i)=>`<div><b>${['왼쪽','가운데','오른쪽'][i]}</b><label>로터<select id="order${i}" aria-label="${['왼쪽','가운데','오른쪽'][i]} 로터">${ROTOR_NAMES.map(x=>`<option ${x===r?'selected':''}>${x}</option>`).join('')}</select></label>${['start'].map(k=>`<label>${k==='start'?'시작 위치':'링 설정'}<select id="${k}${i}" aria-label="${['왼쪽','가운데','오른쪽'][i]} ${k==='start'?'시작 위치':'링 설정'}">${[...ABC].map(x=>`<option ${x===config[k][i]?'selected':''}>${x}</option>`).join('')}</select></label>`).join('')}</div>`).join('');
   const previous=[...config.rotors];
   for(let i=0;i<3;i++) $(`#order${i}`).onchange=e=>{
     // Selecting an installed rotor swaps it with the previous selection.

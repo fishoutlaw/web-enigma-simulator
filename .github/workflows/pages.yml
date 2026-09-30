@@ -16,10 +16,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Test engine and state
-        run: npm test
       - name: Build standalone website
         run: npm run build
+      - name: Test engine, state and distribution
+        run: npm test
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:

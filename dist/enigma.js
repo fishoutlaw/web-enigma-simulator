@@ -1,3 +1,7 @@
+/* Enigma Lab — Py-Enigma-derived engine; MIT notice in licenses/. */
+(() => {
+"use strict";
+const module0 = (() => {
 /*
  * Enigma Lab 계산 엔진
  * Py-Enigma 1.0.2 (Brian Neal, MIT)를 참고하여 JavaScript로 재작성했습니다.
@@ -7,15 +11,15 @@
  * 화면·DOM·애니메이션에 의존하지 않습니다. press()가 한 문자를 계산하고,
  * 화면은 반환된 기록을 재생합니다. 기록 조회로 기계를 다시 움직이지 않습니다.
  */
-export const ABC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const ABC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 // 계산은 0~25, 화면의 내부 접점 번호는 계산 값 + 1로 표시합니다.
 // JavaScript의 음수 나머지를 보정합니다. 예: mod(-1) === 25.
-export const mod = number => ((number % 26) + 26) % 26;
-export const toIndex = letter => ABC.indexOf(letter);
-export const toLetter = number => ABC[mod(number)];
-export const clean = text => text.replace(/[^a-zA-Z]/g, '').toUpperCase();
-export const defaults = () => ({
+const mod = number => ((number % 26) + 26) % 26;
+const toIndex = letter => ABC.indexOf(letter);
+const toLetter = number => ABC[mod(number)];
+const clean = text => text.replace(/[^a-zA-Z]/g, '').toUpperCase();
+const defaults = () => ({
   rotors: ['I', 'II', 'III'], start: 'AAA', rings: 'AAA', plugs: [], reflector: 'B',
 });
 
@@ -29,13 +33,13 @@ const DATA = {
   IV: ['ESOVPZJAYQUIRHXLNFTGKDCMWB', 'J'],
   V: ['VZBRGITYUPSDNHLXAWMJQOFECK', 'Z'],
 };
-export const ROTOR_NAMES = Object.freeze(Object.keys(DATA));
+const ROTOR_NAMES = Object.freeze(Object.keys(DATA));
 const REFLECTOR = 'YRUHQSLDPXNGOKMIEBFZCWVJAT';
 const wiringMap = letters => [...letters].map(toIndex);
 const contact = number => ({number, letter: toLetter(number)});
 const validPosition = value => typeof value === 'string' && /^[A-Z]{3}$/.test(value);
 
-export function validate(config) {
+function validate(config) {
   if (!config || !Array.isArray(config.rotors) || config.rotors.length !== 3 ||
       new Set(config.rotors).size !== 3 || config.rotors.some(name => !Object.hasOwn(DATA, name))) {
     throw new Error('로터 I~V 중 서로 다른 3개를 선택하세요.');
@@ -58,7 +62,7 @@ export function validate(config) {
   return structuredClone({...config, plugs, reflector: 'B'});
 }
 
-export class Rotor {
+class Rotor {
   constructor(name, ring, position) {
     this.name = name;
     this.ring = ring;
@@ -99,7 +103,7 @@ export class Rotor {
   }
 }
 
-export class Plugboard {
+class Plugboard {
   constructor(pairs) {
     // 연결 없는 문자는 그대로 통과합니다. AB 연결은 A→B와 B→A를 동시에 만듭니다.
     this.map = Array.from({length: 26}, (_, index) => index);
@@ -112,7 +116,7 @@ export class Plugboard {
   signal(input) { return this.map[input]; }
 }
 
-export class TraceRecorder {
+class TraceRecorder {
   constructor() { this.steps = []; }
   add(component, name, direction, input, output, internal) {
     const step = {component, name, direction, input: contact(input), output: contact(output)};
@@ -126,7 +130,7 @@ export class TraceRecorder {
   }
 }
 
-export class EnigmaMachine {
+class EnigmaMachine {
   constructor(config, position) {
     this.config = validate(config);
     position = position ?? this.config.start;
@@ -193,7 +197,7 @@ export class EnigmaMachine {
 
 // 문장 처리도 press()를 반복합니다. 제외된 문자에는 press()를 호출하지 않습니다.
 // 복호화는 시작 설정을 복원한 뒤 이 함수에 암호문을 입력하는 동일한 연산입니다.
-export function process(payload) {
+function process(payload) {
   const text = payload.text ?? '';
   const sequence = payload.sequence ?? 0;
   const experiment = payload.experiment ?? '';
@@ -207,3 +211,8 @@ export function process(payload) {
   return {experiment, processed, excluded: [...text].length - processed.length, records,
     position: machine.position, wiring: machine.snapshot(), cipher: records.map(record => record.output).join('')};
 }
+
+return {ABC, mod, toIndex, toLetter, clean, defaults, ROTOR_NAMES, validate, Rotor, Plugboard, TraceRecorder, EnigmaMachine, process};
+})();
+globalThis.EnigmaEngine = Object.freeze(module0);
+})();

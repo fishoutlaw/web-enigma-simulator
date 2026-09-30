@@ -59,6 +59,8 @@ npm run preview
 
 `src`를 수정한 뒤 `npm run build`로 `dist`를 갱신하세요. 빌드는 실행 파일과 배포용 README, 제3자 라이선스 고지를 함께 생성합니다. `dist`를 직접 수정하면 다음 빌드에 덮어씌워집니다.
 
+배포본의 `enigma.js`는 DOM에 의존하지 않는 연산 엔진이며 회전·배선·신호 추적에 한글 주석이 포함되어 있습니다. `app.js`는 입력 대기열·기록·화면·애니메이션을 담당하고 `EnigmaEngine` API를 호출합니다. 두 파일은 `index.html`에 선언된 순서로 실행됩니다.
+
 ## 디렉터리
 
 ```text

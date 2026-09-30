@@ -9,6 +9,7 @@ Python, Node.js, 설치, 계정, 인터넷 연결, 계산 서버가 필요하지
 
 ```text
 index.html
+enigma.js
 app.js
 style.css
 README.md
@@ -16,6 +17,8 @@ THIRD_PARTY_NOTICES.md
 licenses/
   Py-Enigma-MIT.txt
 ```
+
+`enigma.js`는 암호화·로터 회전·신호 추적을, `app.js`는 화면 조작과 재생을 담당합니다. 두 파일을 모두 함께 복사하세요.
 
 ## 사용
 
