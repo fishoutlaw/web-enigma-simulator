@@ -45,7 +45,7 @@
 
 ## 소스 수정·테스트
 
-개발 도구는 **Node.js 20 이상**입니다. 검증 환경은 Node.js 24.19.0입니다. 외부 npm 패키지를 사용하지 않으므로 `npm install`은 필요하지 않습니다.
+개발 도구는 **Node.js 20 이상**입니다. 외부 npm 패키지를 사용하지 않으므로 `npm install`은 필요하지 않습니다.
 
 저장소 루트에서 실행하세요.
 
@@ -67,30 +67,10 @@ src/core/              JavaScript 계산·신호 추적
 src/experiment/        실험 상태·대기열
 src/ui/                화면·SVG·로터 애니메이션
 tests/                 Node 내장 테스트 및 고정 Python 기준 데이터
-tools/                 빌드·정적 미리보기·기준 데이터 생성 도구
+tools/                 빌드·정적 미리보기 도구
 docs/DISTRIBUTION.md   dist/README.md 원본
 licenses/              원본 Py-Enigma MIT 고지
 ```
-
-## 정확성 및 검증 범위
-
-자동 테스트 11개에서 기존 52개 Py-Enigma 기준 사례의 암호문·전체 경로·배선을 비교하고, 추가로 I~V의 60개 순서 × 3개 시작 위치(180개 사례, 9,360자)의 암호문·최종 위치 및 복호화 왕복을 검증합니다. 더블 스테핑, 입력 필터, 대기열 순서, 초기화 취소, 탭 독립성, 로터 배선의 이동 좌표도 검사합니다.
-
-저장된 기준 데이터로 테스트하므로 Python이 없어도 테스트할 수 있습니다. `tools/generate-fixtures.py`는 개발 초기의 별도 Python 앱에서 기준 데이터를 다시 만드는 선택 도구이며, 실행·빌드·테스트 절차에는 포함되지 않습니다. 해당 도구에는 이 저장소 상위의 기존 `engine.py`와 Py-Enigma 1.0.2가 필요합니다.
-
-실제 브라우저에서 조작·복호화·작은 화면을 확인했습니다. 자동화 도구는 `file://` 접근을 차단하므로 직접 파일 열기 자체는 자동 검증하지 못했습니다. 정적 HTTP 미리보기와 서버 종료 후 계산은 확인했습니다. 모든 브라우저·터치 기기에 대한 검증을 의미하지 않습니다. `VERIFICATION.md`에 상세 기록이 있습니다.
-
-## Git 업로드 및 배포
-
-이 저장소의 루트는 `web-only`입니다. 상위 폴더의 Python 앱·가상환경·강의 PDF는 포함하지 않습니다. 로그, 스크린샷, 비밀 설정 파일은 `.gitignore`로 제외합니다.
-
-소스 관리에는 이 저장소 전체를, 정적 웹 배포에는 **`dist`의 내용**을 사용하세요. `dist`만 별도 저장소에 올려도 앱 실행에는 문제가 없지만 소스·테스트·빌드 도구는 포함되지 않습니다.
-
-저장소: https://github.com/fishoutlaw/web-enigma-simulator
-
-`main`에 변경을 푸시하면 `.github/workflows/pages.yml`이 테스트 → 빌드 → GitHub Pages 배포를 수행합니다. 공개되는 파일은 `dist` 내용뿐입니다. `start.cmd`는 배포에 사용하지 않으며 웹에서는 `index.html`이 시작 페이지입니다.
-
-GitHub 저장소의 **Settings → Pages → Source**는 **GitHub Actions**로 설정합니다. 배포 결과는 **Actions → Deploy Enigma Lab to GitHub Pages**에서 확인할 수 있습니다. 별도 토큰이나 저장소 비밀 변수를 추가할 필요가 없습니다.
 
 ## 출처·라이선스
 

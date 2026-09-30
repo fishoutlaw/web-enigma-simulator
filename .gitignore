@@ -9,3 +9,6 @@ Thumbs.db
 .venv/
 __pycache__/
 *.py[cod]
+
+VERIFICATION.md
+tools/generate-fixtures.py
